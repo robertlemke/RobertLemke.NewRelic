@@ -1,0 +1,22 @@
+{
+	"name": "robertlemke/newrelic",
+	"type": "typo3-flow-package",
+	"description": "Integration of New Relic, a server and application monitor",
+	"license": ["MIT"],
+	"authors": [
+		{
+			"name": "Robert Lemke",
+			"email": "rl@robertlemke.com",
+			"homepage": "http://robertlemke.com",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"typo3/flow": ">=2.0.0-beta1"
+	},
+	"autoload": {
+		"psr-0": {
+			"RobertLemke\\NewRelic": "Classes"
+		}
+	}
+}
