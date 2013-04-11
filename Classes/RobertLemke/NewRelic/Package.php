@@ -25,7 +25,10 @@ class Package extends BasePackage {
 	 */
 	public function boot(Bootstrap $bootstrap) {
 		if (extension_loaded('newrelic')) {
-			$appName = getenv('ROBERTLEMKE_NEWRELIC_APPNAME') ?: (getenv('ROBERTLEMKE_NEWRELIC_APPNAME') ?: 'TYPO3 Flow Application');
+			$appName = getenv('ROBERTLEMKE_NEWRELIC_APPNAME') ?: NULL;
+			if ($appName === NULL) {
+				$appName = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : 'TYPO3 Flow Application';
+			}
 			newrelic_set_appname($appName);
 			$dispatcher = $bootstrap->getSignalSlotDispatcher();
 			$dispatcher->connect('TYPO3\Flow\Mvc\Dispatcher', 'beforeControllerInvocation',
