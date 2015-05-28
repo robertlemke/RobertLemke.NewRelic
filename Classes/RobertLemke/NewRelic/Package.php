@@ -34,7 +34,12 @@ class Package extends BasePackage {
 			$dispatcher->connect('TYPO3\Flow\Mvc\Dispatcher', 'beforeControllerInvocation',
 				function(RequestInterface $request, ResponseInterface $response, ControllerInterface $controller) {
 					if ($request instanceof ActionRequest) {
-						newrelic_name_transaction ($request->getControllerPackageKey() . ($request->getControllerSubpackageKey() != '' ? '/' . $request->getControllerSubpackageKey() : '') . '/' . $request->getControllerActionName());
+						newrelic_name_transaction (
+							$request->getControllerPackageKey() . '/' .
+							($request->getControllerSubpackageKey() != '' ? $request->getControllerSubpackageKey() . '/' : '') .
+							$request->getControllerName() . '/' .
+							$request->getControllerActionName()
+						);
 					}
 				}
 			);
